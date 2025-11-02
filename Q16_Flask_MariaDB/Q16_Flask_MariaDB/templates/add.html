@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ action }} Course</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
+        input[type="text"]:focus, input[type="number"]:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 10px 0;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-submit {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        .btn-cancel {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+        .message {
+            text-align: center;
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>{{ action }} Course</h2>
+        <form method="post">
+            <label for="course_name">Course Name</label>
+            <input type="text" id="course_name" name="course_name" value="{{ course.course_name if course else '' }}" required>
+
+            <label for="provider">Provider</label>
+            <input type="text" id="provider" name="provider" value="{{ course.provider if course else '' }}" required>
+
+            <label for="skills">Skills</label>
+            <input type="text" id="skills" name="skills" value="{{ course.skills if course else '' }}" required>
+
+            <label for="rating">Rating</label>
+            <input type="text" id="rating" name="rating" value="{{ course.rating if course else '' }}" required>
+
+            <label for="total_reviews">Total Reviews</label>
+            <input type="text" id="total_reviews" name="total_reviews" value="{{ course.total_reviews if course else '' }}" required>
+
+            <label for="level">Level</label>
+            <select id="level" name="level" required>
+                <option value="">Select Level</option>
+                <option value="Beginner" {% if course and course.level == 'Beginner' %}selected{% endif %}>Beginner</option>
+                <option value="Intermediate" {% if course and course.level == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+                <option value="Advanced" {% if course and course.level == 'Advanced' %}selected{% endif %}>Advanced</option>
+            </select>
+
+            <label for="duration">Duration</label>
+            <input type="text" id="duration" name="duration" value="{{ course.duration if course else '' }}" required>
+
+            <button type="submit" class="btn btn-submit">{{ action }}</button>
+            <a href="{{ url_for('index') }}" class="btn btn-cancel">Cancel</a>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="message">
+                    {% for message in messages %}
+                        {{ message }}<br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
