@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Netflix Shows</title>
+    <style>
+        body { font-family: Arial; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Netflix Shows</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Director</th>
+                <th>Country</th>
+                <th>Release Year</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for show in shows %}
+            <tr>
+                <td>{{ show.title }}</td>
+                <td>{{ show.show_type }}</td>
+                <td>{{ show.director }}</td>
+                <td>{{ show.country }}</td>
+                <td>{{ show.release_year }}</td>
+                <td>{{ show.rating }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
